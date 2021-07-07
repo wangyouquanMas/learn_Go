@@ -6,6 +6,8 @@ import (
 )
 
 
+// channel 特点 可以实现goroutines同步  ，因为接收端和发送断会阻塞 在另一段没有ready前
+
 func worker(id int , c chan int){
 
 
