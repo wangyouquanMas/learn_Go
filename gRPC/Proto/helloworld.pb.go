@@ -24,6 +24,8 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+//    按照 proto 文件中所申明的各种不同消息类型，会生成对应名称的 struct 结构体
+// 请求消息格式
 type HelloRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -71,6 +73,7 @@ func (x *HelloRequest) GetName() string {
 	return ""
 }
 
+// 响应消息格式
 type HelloReply struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -127,12 +130,16 @@ var file_helloworld_proto_rawDesc = []byte{
 	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x26, 0x0a,
 	0x0a, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x18, 0x0a, 0x07, 0x6d,
 	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x32, 0x3f, 0x0a, 0x07, 0x47, 0x72, 0x65, 0x65, 0x74, 0x65, 0x72,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x32, 0x7a, 0x0a, 0x07, 0x47, 0x72, 0x65, 0x65, 0x74, 0x65, 0x72,
 	0x12, 0x34, 0x0a, 0x08, 0x53, 0x61, 0x79, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x12, 0x13, 0x2e, 0x50,
 	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
 	0x74, 0x1a, 0x11, 0x2e, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52,
-	0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x2e, 0x2f, 0x50, 0x72, 0x6f,
-	0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x70, 0x6c, 0x79, 0x22, 0x00, 0x12, 0x39, 0x0a, 0x0d, 0x53, 0x61, 0x79, 0x48, 0x65, 0x6c,
+	0x6c, 0x6f, 0x41, 0x67, 0x61, 0x69, 0x6e, 0x12, 0x13, 0x2e, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
+	0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x11, 0x2e, 0x50,
+	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22,
+	0x00, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x2e, 0x2f, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -154,9 +161,11 @@ var file_helloworld_proto_goTypes = []interface{}{
 }
 var file_helloworld_proto_depIdxs = []int32{
 	0, // 0: Proto.Greeter.SayHello:input_type -> Proto.HelloRequest
-	1, // 1: Proto.Greeter.SayHello:output_type -> Proto.HelloReply
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	0, // 1: Proto.Greeter.SayHelloAgain:input_type -> Proto.HelloRequest
+	1, // 2: Proto.Greeter.SayHello:output_type -> Proto.HelloReply
+	1, // 3: Proto.Greeter.SayHelloAgain:output_type -> Proto.HelloReply
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -224,11 +233,10 @@ const _ = grpc.SupportPackageIsVersion6
 // GreeterClient is the client API for Greeter service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-//Client 端的对象是由 protoc 自动生成的，其实现了 GreeterClient 接口
 type GreeterClient interface {
 	SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error)
+	SayHelloAgain(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error)
 }
-
 
 type greeterClient struct {
 	cc grpc.ClientConnInterface
@@ -238,9 +246,6 @@ func NewGreeterClient(cc grpc.ClientConnInterface) GreeterClient {
 	return &greeterClient{cc}
 }
 
-
-//叫做 Client Stub，其实就是相当于本地实现了一个 SayHello 函数，当 grpc 的客户端调用 SayHello 函数的时候，
-//其调用的就是这个本地的 SayHello 函数，这个函数在内部通过 grpc.Invoke() 的方式实现了远程调用。
 func (c *greeterClient) SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error) {
 	out := new(HelloReply)
 	err := c.cc.Invoke(ctx, "/Proto.Greeter/SayHello", in, out, opts...)
@@ -250,11 +255,19 @@ func (c *greeterClient) SayHello(ctx context.Context, in *HelloRequest, opts ...
 	return out, nil
 }
 
-// GreeterServer is the server API for Greeter service.
+func (c *greeterClient) SayHelloAgain(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error) {
+	out := new(HelloReply)
+	err := c.cc.Invoke(ctx, "/Proto.Greeter/SayHelloAgain", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
 
-//Server 端的对象则需要我们自己去手动编写了。因为我们是服务提供方嘛，提供什么具体的服务当然是由我们决定的。
+// GreeterServer is the server API for Greeter service.
 type GreeterServer interface {
 	SayHello(context.Context, *HelloRequest) (*HelloReply, error)
+	SayHelloAgain(context.Context, *HelloRequest) (*HelloReply, error)
 }
 
 // UnimplementedGreeterServer can be embedded to have forward compatible implementations.
@@ -264,9 +277,10 @@ type UnimplementedGreeterServer struct {
 func (*UnimplementedGreeterServer) SayHello(context.Context, *HelloRequest) (*HelloReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")
 }
+func (*UnimplementedGreeterServer) SayHelloAgain(context.Context, *HelloRequest) (*HelloReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SayHelloAgain not implemented")
+}
 
-
-//在我们的服务端，自己去定义一个 struct 对象，实现 .pb.go 中所声明的 GreeterServer 接口，然后把那个 struct 注册到 grpc 服务上。  ？
 func RegisterGreeterServer(s *grpc.Server, srv GreeterServer) {
 	s.RegisterService(&_Greeter_serviceDesc, srv)
 }
@@ -289,6 +303,24 @@ func _Greeter_SayHello_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Greeter_SayHelloAgain_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HelloRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GreeterServer).SayHelloAgain(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Proto.Greeter/SayHelloAgain",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GreeterServer).SayHelloAgain(ctx, req.(*HelloRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Greeter_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "Proto.Greeter",
 	HandlerType: (*GreeterServer)(nil),
@@ -296,6 +328,10 @@ var _Greeter_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SayHello",
 			Handler:    _Greeter_SayHello_Handler,
+		},
+		{
+			MethodName: "SayHelloAgain",
+			Handler:    _Greeter_SayHelloAgain_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -1,0 +1,65 @@
+syntax = "proto3";
+package Proto;  //
+
+
+
+option go_package = "../Proto";
+
+message Person {
+  string name = 1;
+  int32 id = 2;  // Unique ID number for this person.
+  string email = 3;
+
+  enum PhoneType {
+    MOBILE = 0;
+    HOME = 1;
+    WORK = 2;
+  }
+
+//  define message types nested inside other messages
+      message PhoneNumber {
+    string number =1;  // 1 ，2 作为 unique tag     (  field uses this tag in the binary encoding. )
+    PhoneType type = 2;
+  }
+  //  contains PhoneNumber messages,
+  //   as an optimization you can decide to use those tags for the commonly used or repeated elements,
+//  If a field is repeated, the field may be repeated any number of times (including zero).
+//  The order of the repeated values will be preserved in the protocol buffer. Think of repeated fields as dynamically sized arrays.
+  repeated PhoneNumber phones = 4;
+
+
+}
+
+// Our address book file is just one of these.
+message AddressBook {
+
+//  while the AddressBook message contains Person messages.
+  repeated Person people = 1;
+}
+
+// 补充 tag 作用
+//    varints是基于数值越小，小数值使用越频繁，压缩效率越高的一种思路，目前来看google的protobuf数据格式使用该方式进行数据的序列化实现。
+// varints :  Varints are a method of serializing integers using one or more bytes.
+//    varint中的每个byte的bit位都有一个最高有效位 【most significant bit 】 ，最高有效位用来表示这个byte之后是不是还有byte [注意是字节！！]需要解析
+//   后7位用来表示int值的二进制补码。
+//例子
+/*
+    1010 1100 0000 0010 理解成两个字节
+    1010 1100 //byte0  最高位为1表示后续还有字节需要解析，因此byte0的bit7为1， 后7位为数据位。
+        010 1100  //有效位
+    0000 0010 //byte1    byte1是最后一个字节，后续没有要解析的，所以最高位0
+        000 0010  //有效位
+    低位组优先排序【least significant group first】  的原则，将两个byte的数据有效位拼接得到如下二进制表示。
+    000 0010 010 1100   =》 300*/
+
+
+/*
+  如何  compiler proto文件
+1   指定源目录  【应用源代码存储目录，默认是当前目录】
+2   指定输出目录  【一般和 $SRC_DIR 一致】
+3   指定 .proto所在的path
+
+  如 protoc -I=. --go_out=. ./addressbook.proto
+
+
+*/

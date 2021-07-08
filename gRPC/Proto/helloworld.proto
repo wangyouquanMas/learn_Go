@@ -5,15 +5,30 @@ option go_package = "../Proto";
 
 
 //    按照 proto 文件中所申明的各种不同消息类型，会生成对应名称的 struct 结构体
+// 请求消息格式
 message HelloRequest {
   string name = 1 ;
 }
 
+// 响应消息格式
 message HelloReply {
   string message = 1;
 }
 
 // The request message containing the user's name.
+// rpc服务 发送消息 并指定返回消息格式
+// 同一个服务内可以有多个rpc
 service Greeter {
+
   rpc SayHello (HelloRequest) returns(HelloReply){}
+
+  rpc SayHelloAgain (HelloRequest) returns(HelloReply){}
+
 }
+
+
+//  proto buffer作用 ：    serialize and retrieve structured data
+
+// 如何写proto文件
+// 1 为每一个想要序列化的数据结构增加一个消息  【序列化？ 】
+// 2 为消息中的每一个字段指定名称和类型   【字段 : 包含基本数据类型 和 其他message类型】
