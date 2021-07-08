@@ -1,0 +1,19 @@
+syntax = "proto3";
+package Proto;
+option go_package = "../Proto";
+
+
+
+//    按照 proto 文件中所申明的各种不同消息类型，会生成对应名称的 struct 结构体
+message HelloRequest {
+  string name = 1 ;
+}
+
+message HelloReply {
+  string message = 1;
+}
+
+// The request message containing the user's name.
+service Greeter {
+  rpc SayHello (HelloRequest) returns(HelloReply){}
+}
