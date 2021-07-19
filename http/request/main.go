@@ -1,10 +1,15 @@
 package main
 
-//request struct 包含的字段含义
+import (
+	"channel/http/request/handler"
+	"net/http"
+)
 
-type request struct {
-	//specifies the http method for client requests,an empty string means get
-	Method string
+//request struct 包含字段的使用
 
+func main() {
 
+	http.HandleFunc("/net/http/test", handler.UploadFile)
+
+	http.ListenAndServe(":8080", nil)
 }
