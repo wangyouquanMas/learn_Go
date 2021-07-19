@@ -21,7 +21,7 @@ func main()  {
 	afterTenHours := start.Add(time.Hour * 10)
 	afterTenDays := start.Add(time.Hour * 24 * 10)
 
-	yesterDays := start.Add(-time.Hour*24).Format("20060102")
+	yesterDays := start.Add(-time.Hour*(24+12)).Format("20060102")
 
 	fmt.Printf("start = %v\n", start)
 	fmt.Printf("start.Add(time.Second * 10) = %v\n", afterTenSeconds)
@@ -46,6 +46,22 @@ func main()  {
 	//fmt.Println(endKey)
 
 
+	//
+	fmt.Println("______我是间隔符_________")
+
+	startKey1 := "{20210707}-1"
+	fmt.Println(time.Now().Hour())
+	fmt.Println([]byte(startKey1))
+	//
+	fmt.Println("______我是间隔符_________")
+	//格式化输出时间
+	fmt.Println(date)
+	// 必须使用这个时间才能返回正确的格式化后的时间，其他的都不行
+	fmt.Println(date.Format("20060102150405"))
+
+	fmt.Println("______我是间隔符_________")
+
+	fmt.Println(date.UTC().Hour()+8)
 
 
 }
