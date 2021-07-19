@@ -12,6 +12,7 @@ type countHandler struct{
 	n int
 }
 
+//ServeHTTP: write reply headers and data to ResponseWriter
 func (h *countHandler) ServeHTTP(w http.ResponseWriter,r * http.Request){
 	h.mu.Lock()
 	defer h.mu.Unlock()

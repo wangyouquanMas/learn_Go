@@ -99,4 +99,23 @@ func main() {
   var str string = string(data[:])
   fmt.Printf(str)
 
+
+  fmt.Println("************分隔符************")
+
+
+ //数组
+ var (
+  field = []string{"name"}
+  )
+  fmt.Println(field)
+
+ stringarr := []string{"要给值"}
+ var stringarr1 = []string{"1"}
+ var a []string =  []string{"1"}
+ fmt.Println(stringarr1,stringarr,a)
+
+
+
+
+
 }
