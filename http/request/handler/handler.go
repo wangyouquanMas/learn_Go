@@ -14,5 +14,4 @@ func UploadFile(r *http.Request, w http.ResponseWriter) {
 
 		r.FormFile()
 	}
-
 }
