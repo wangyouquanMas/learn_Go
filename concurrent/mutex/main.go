@@ -46,4 +46,49 @@ func (c *Counter) Incr() {
 	c.Unlock()
 }
 
-//3
+type Foo struct {
+	mu    sync.Mutex
+	count int
+}
+
+//3 通过defer可以实现 Lock/Unlock成对出现,不会遗漏或多调用
+func (f *Foo) Bar() {
+	f.mu.Lock()
+	defer f.mu.Unlock()
+
+	if f.count < 1000 {
+		f.count += 3
+		return
+	}
+
+	f.count++
+	return
+}
+
+func cas(val *int32, old, new int32) bool
+func semacquire(*int32)
+func semrelease(*int32)
+
+//互斥锁的结构，包含两个字段
+type Mutex struct {
+	key  int32 //锁是否被持有的标识
+	sema int32 //信号量专用，用以阻塞/唤醒goroutine
+}
+
+//保证成功在val上增加delta值
+func xadd(val *int32, delta int32) (new int32) {
+	for {
+		v := *val
+		if cas(val, v, v+delta) {
+			return v + delta
+		}
+	}
+	panic("unreached")
+}
+
+//请求锁
+func (m *Mutex) Lock() {
+	if xadd(&m.key, 1) == 1 { //
+		return
+	}
+}
