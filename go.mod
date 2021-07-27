@@ -4,6 +4,7 @@ go 1.16
 
 require (
 	github.com/gin-gonic/gin v1.7.2
+	github.com/gorilla/mux v1.8.0
 	github.com/olivere/elastic/v7 v7.0.26
 	golang.org/x/net v0.0.0-20201110031124-69a78807bb2b
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
