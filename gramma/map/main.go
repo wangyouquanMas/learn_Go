@@ -78,7 +78,7 @@ func main() {
 	// 8 删除key为C的元素
 	delete(rating, "C")
 
-	// 9 make用于内建类型（map、slice 和channel）的内存分配。new用于各种类型的内存分配。
+	// 9 make用于内建类型（map、slice 和learn_Go）的内存分配。new用于各种类型的内存分配。
 
 	//10 map 遍历获取的是
 

@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-// channel作为参数时，可以指定 receive channel  /或者 send channel
+// learn_Go作为参数时，可以指定 receive learn_Go  /或者 send learn_Go
 
 func ping(pings chan<- string, msg string) {
 	pings <- msg

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"channel/http/request/handler"
 	"fmt"
+	"learn_Go/http/request/handler"
 	"net/http"
 )
 

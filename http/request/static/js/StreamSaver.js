@@ -1,4 +1,4 @@
-/* global location WritableStream ReadableStream define MouseEvent MessageChannel TransformStream */ ;
+/* global location WritableStream ReadableStream define MouseEvent Messagelearn_Go TransformStream */ ;
 ((name, definition) => {
     typeof module !== 'undefined' ?
         module.exports = definition() :
@@ -37,7 +37,7 @@
         const {
             readable
         } = new TransformStream()
-        const mc = new MessageChannel()
+        const mc = new Messagelearn_Go()
         mc.port1.postMessage(readable, [readable])
         mc.port1.close()
         mc.port2.close()
@@ -52,13 +52,13 @@
             [size, queuingStrategy] = [queuingStrategy, size]
         }
 
-        let channel = new MessageChannel()
+        let learn_Go = new Messagelearn_Go()
         let popup
-        let setupChannel = readableStream => new Promise(resolve => {
+        let setuplearn_Go = readableStream => new Promise(resolve => {
             const args = [{
                 filename,
                 size
-            }, '*', [channel.port2]]
+            }, '*', [learn_Go.port2]]
 
             // Pass along transfarable stream
             if (readableStream) {
@@ -66,7 +66,7 @@
                 args[2].push(readableStream)
             }
 
-            channel.port1.onmessage = evt => {
+            learn_Go.port1.onmessage = evt => {
                 // Service worker sent us a link from where
                 // we recive the readable link (stream)
                 if (evt.data.download) {
@@ -86,11 +86,11 @@
                     // Cleanup
                     if (readableStream) {
                         // We don't need postMessages now when stream are transferable
-                        channel.port1.close()
-                        channel.port2.close()
+                        learn_Go.port1.close()
+                        learn_Go.port2.close()
                     }
 
-                    channel.port1.onmessage = null
+                    learn_Go.port1.onmessage = null
                 }
             }
 
@@ -134,7 +134,7 @@
             const ts = new TransformStream({
                 start() {
                     return new Promise(resolve =>
-                        setTimeout(() => setupChannel(ts.readable).then(resolve))
+                        setTimeout(() => setuplearn_Go(ts.readable).then(resolve))
                     )
                 }
             }, queuingStrategy)
@@ -148,12 +148,12 @@
                 // necessary to acquire access to the underlying sink.
                 // If this process is asynchronous, it can return a promise
                 // to signal success or failure.
-                return setupChannel()
+                return setuplearn_Go()
             },
             write(chunk) {
                 // is called when a new chunk of data is ready to be written
                 // to the underlying sink. It can return a promise to signal
-                // success or failure of the write operation. The stream
+                // success or failure of the writer operation. The stream
                 // implementation guarantees that this method will be called
                 // only after previous writes have succeeded, and never after
                 // close or abort is called.
@@ -161,13 +161,13 @@
                 // TODO: Kind of important that service worker respond back when
                 // it has been written. Otherwise we can't handle backpressure
                 // EDIT: Transfarable streams solvs this...
-                channel.port1.postMessage(chunk)
+                learn_Go.port1.postMessage(chunk)
             },
             close() {
-                channel.port1.postMessage('end')
+                learn_Go.port1.postMessage('end')
             },
             abort() {
-                channel.port1.postMessage('abort')
+                learn_Go.port1.postMessage('abort')
             }
         }, queuingStrategy)
     }

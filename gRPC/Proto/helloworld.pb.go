@@ -243,6 +243,7 @@ type greeterClient struct {
 }
 
 func NewGreeterClient(cc grpc.ClientConnInterface) GreeterClient {
+	x
 	return &greeterClient{cc}
 }
 
