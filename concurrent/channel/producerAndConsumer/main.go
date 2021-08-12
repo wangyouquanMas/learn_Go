@@ -22,6 +22,7 @@ func producer(data chan int) {
 	}
 }
 
+//使用 range 来操作 channel 的时候,一旦 channel 关闭，channel 内部数据读完之后循环自动结束。
 func consumer(data chan int) {
 	for s := range data {
 		fmt.Printf("consumer consume s=%v\n", s)
