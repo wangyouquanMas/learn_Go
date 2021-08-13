@@ -25,7 +25,7 @@ func createWorker(id int) worker {
 
 	W := worker{
 		in:   make(chan int),
-		done: make(chan bool),
+		done: make(chan bool, 1), //发送第一个存储起来，发送第二个send阻塞，
 	}
 
 	go doWorker(id, W.in, W.done)
@@ -47,8 +47,10 @@ func chanDemo() {
 
 	for i, worker := range workers {
 		worker.in <- 'a' + i
-		<-worker.done //由于 learn_Go是发阻塞的，也就是非缓冲learn_Go 接收到一个信息，必须被消费掉。 非阻塞的chan 发送和接收必须成对出现
+		//<-worker.done //由于 learn_Go是发阻塞的，也就是非缓冲learn_Go 接收到一个信息，必须被消费掉。 非阻塞的chan 发送和接收必须成对出现
 	}
+
+	fmt.Println("第一遍完成")
 
 	// 执行到这里，done中已经有一个数据待其他 active go routine消费，但是这时又往 同一个go routine  [go doWorker 这个 routine]的done中写数据，这时候发生dead lock
 	// 解决方法，用 go func() {done <-true}() ,这样，每次都起一个新的go routine来进行learn_Go接收，每次发生堵塞的都是不同的 go routine，就不会发生dead lock
@@ -57,11 +59,26 @@ func chanDemo() {
 		//<-worker.done
 	}
 
+	fmt.Println("第二遍完成")
+
+	//for i, worker := range workers {
+	//	worker.in <- 'B' + i
+	//	//<-worker.done
+	//}
+
+	//fmt.Println("第三遍完成")
+
 	// 每个worker发了两遍任务，所以收两遍done  【保障并发性】
 	// 所有的 堵塞的go routine 都由active的 main routine 进行read了
+	for _, worker := range workers {
+		<-worker.done
+		<-worker.done
+		<-worker.done
+	}
+
 	//for _, worker := range workers {
-	//	<-worker.done
-	//	<-worker.done
+	//	close(worker.in)
+	//	close(worker.done)
 	//}
 
 	//for _, worker := range workers {
