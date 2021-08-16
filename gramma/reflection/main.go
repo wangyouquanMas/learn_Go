@@ -5,6 +5,7 @@ import (
 	"reflect"
 )
 
+//123
 //反射是一种机制来检查 类型和value值存储在接口变量中的
 
 //Package中 reflect type /value 可以获取到接口变量值的内容
