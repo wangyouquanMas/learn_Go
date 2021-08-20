@@ -49,13 +49,15 @@ func main() {
 			if i > 90 {
 				fmt.Println("Error:", i)
 				return fmt.Errorf("Error occurred: %d", i)
+				//return nil
 			}
 			fmt.Println("End:", i)
 			return nil
 		})
 	}
+
 	if err := eg.Wait(); err != nil {
-		log.Fatal(err)
+		log.Fatal(err) //打印出第一个出现的错误
 	}
 
 }
