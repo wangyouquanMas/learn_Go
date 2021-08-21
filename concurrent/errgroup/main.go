@@ -7,7 +7,6 @@ import (
 	"time"
 )
 
-
 func main() {
 	//sync.WaitGroup 使用于协同场景
 
@@ -26,7 +25,6 @@ func main() {
 	//	}
 	////main协程调用 wg.Wait() 且被block，直到所有worker协程全部执行结束后返回。
 	//	wg.Wait()
-
 
 	//woker goroutine的执行过程中遇到错误想要通知在检查点等待的协程处理该怎么办呢？WaitGroup并没有提供传播错误的功能。
 	//	Go语言在扩展库提供的ErrorGroup并发原语正好适合在这种场景下使用，它在WaitGroup的功能基础上还提供了，错误传播以及上下文取消的功能。
@@ -51,14 +49,15 @@ func main() {
 			if i > 90 {
 				fmt.Println("Error:", i)
 				return fmt.Errorf("Error occurred: %d", i)
+				//return nil
 			}
 			fmt.Println("End:", i)
 			return nil
 		})
 	}
+
 	if err := eg.Wait(); err != nil {
-		log.Fatal(err)
+		log.Fatal(err) //打印出第一个出现的错误
 	}
 
 }
-

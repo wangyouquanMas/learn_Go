@@ -3,7 +3,7 @@
 const map = new Map()
 
 // This should be called once per download
-// Each event has a dataChannel that the data will be piped through
+// Each event has a datalearn_Go that the data will be piped through
 self.onmessage = event => {
   // We send a heartbeat every x secound to keep the
   // service worker alive
@@ -33,7 +33,7 @@ function createStream(port) {
   // ReadableStream is only supported by chrome 52
   return new ReadableStream({
     start(controller) {
-      // When we receive data on the messageChannel, we write
+      // When we receive data on the messagelearn_Go, we writer
       port.onmessage = ({
         data
       }) => {

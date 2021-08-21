@@ -1,4 +1,4 @@
-package _interface
+package main
 
 import (
 	"fmt"
@@ -148,6 +148,7 @@ func main() {
 			return Fprintf(os.Stdout, format, a...)
 			}*/
 
+	Test(3, 4, 5)
 }
 
 //6 如果一个interface1作为interface2的一个嵌入字段，那么interface2隐式的包含了interface1里面的method。
@@ -155,4 +156,8 @@ type Interface interface {
 	sort.Interface      //嵌入字段sort.Interface
 	Push(x interface{}) //a Push method to push elements into the heap
 	Pop() interface{}   //a Pop elements that pops elements from the heap
+}
+
+func Test(a ...interface{}) {
+	fmt.Printf("a is %d", a)
 }
