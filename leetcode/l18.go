@@ -5,6 +5,8 @@ import (
 	"sort"
 )
 
+// 1
+2 
 func main() {
 
 	input := []int{0, 0, 0, 0}
