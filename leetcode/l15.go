@@ -1,27 +1,3 @@
-//给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和
-//。假定每组输入只存在唯一答案。
-//
-//
-//
-// 示例：
-//
-// 输入：nums = [-1,2,1,-4], target = 1
-//输出：2
-//解释：与 target 最接近的和是 2 (-1 + 2 + 1 = 2) 。
-//
-//
-//
-//
-// 提示：
-//
-//
-// 3 <= nums.length <= 10^3
-// -10^3 <= nums[i] <= 10^3
-// -10^4 <= target <= 10^4
-//
-// Related Topics 数组 双指针 排序 👍 856 👎 0
-
-//leetcode submit region begin(Prohibit modification and deletion)
 package main
 
 import (
@@ -30,53 +6,60 @@ import (
 )
 
 func main() {
-
-	var nums = []int{1, 1, 1, 1}
-	target := 1
-	res := threeSumClosest(nums, target)
-	fmt.Println(res)
+	input := []int{-1, 0, 1, 2, -1, -4}
+	fmt.Println(threeSum(input))
 }
 
-func threeSumClosest(nums []int, target int) int {
+//leetcode submit region begin(Prohibit modification and deletion)
+func threeSum(nums []int) [][]int {
 
 	if nums == nil || len(nums) == 0 {
-		return 0
+		return nil
 	}
 	sort.Ints(nums)
-	n := len(nums)
-	k := n - 1
-	var min int = 1e8
-	var sum2 int
-	for i := 0; i < n; i++ {
-		for j := i + 1; j < k; j++ {
 
-			for j < k-1 && nums[i]+nums[j]+nums[k-1] >= target {
+	//var res [][]int
+	//res = make([][]int,0)
+
+	res := [][]int{}
+
+	n := len(nums) - 1
+	for i := 0; i < n; i++ {
+		if i > 0 && nums[i] == nums[i-1] {
+			continue
+		}
+
+		j := i + 1
+		k := len(nums) - 1
+
+		for j < k {
+			sum := nums[i] + nums[j] + nums[k]
+			if sum < 0 {
+				j++
+				continue
+			}
+
+			if sum > 0 {
+				k--
+				continue
+			}
+
+			for k > j && nums[k] == nums[k-1] {
 				k--
 			}
 
-			sum1 := nums[i] + nums[j] + nums[k]
-			if j < k-1 {
-				sum2 = nums[i] + nums[j] + nums[k-1]
+			for k > j && nums[j] == nums[j+1] {
+				j++
 			}
-			res := compare(sum1, sum2, target)
-			min = compare(min, res, target)
+
+			if sum == 0 {
+				res = append(res, []int{nums[i], nums[j], nums[k]})
+				k-- //执行完之后，nums[j],nums[k]，nums[i] 在j<k情况下还有可能为0
+				continue
+			}
 		}
 	}
-	return min
-}
-func compare(a, b, c int) int {
-	if abs(a-c) > abs(c-b) {
-		return b
-	} else {
-		return a
-	}
-	return 0
-}
-func abs(a int) int {
-	if a < 0 {
-		return -a
-	}
-	return a
+	return res
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
