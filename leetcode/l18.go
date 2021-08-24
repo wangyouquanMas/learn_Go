@@ -6,7 +6,7 @@ import (
 )
 
 // 1
-2 
+2
 func main() {
 
 	input := []int{0, 0, 0, 0}
