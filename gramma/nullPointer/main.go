@@ -22,13 +22,28 @@ func (n *Number) GetMax() []*MaxNum {
 }
 
 func main() {
-	var num *Number
+	//var num *Number
+	//
+	////maxs := num.max
+	////for _, v := range maxs {
+	////	fmt.Println(v.year)
+	////}
+	//
+	//fmt.Println(num.GetMax())
 
-	//maxs := num.max
-	//for _, v := range maxs {
-	//	fmt.Println(v.year)
-	//}
+	//指针必须要先初始化，没有初始化就返回，会报错 ？？
+	fmt.Println(Pointer(2))
+}
 
-	fmt.Println(num.GetMax())
+func Pointer(a int) (res *MaxNum, e error) {
 
+	if a < 3 {
+		return
+	}
+
+	res = &MaxNum{
+		year: 2021,
+	}
+
+	return res, e
 }
