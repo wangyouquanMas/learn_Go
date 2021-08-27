@@ -22,4 +22,9 @@ func main() {
 	a := "{2021082416777216}-2-99"
 	fmt.Println([]byte(a))
 
+	//字符串比较
+	s := "abc"
+	var s1 = []string{"abc"}
+
+	fmt.Println(s1[0] == s)
 }
