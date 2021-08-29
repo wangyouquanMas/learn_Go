@@ -30,7 +30,7 @@ func groupAnagrams(strs []string) [][]string {
 		s := SortString(v)
 		isShowMap[s] = append(isShowMap[s], v)
 	}
-	.
+	. ..
 	for _, v := range isShowMap {
 		res = append(res, v)
 	}
