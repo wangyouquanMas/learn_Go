@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 func main() {
@@ -25,6 +26,12 @@ func main() {
 	//字符串比较
 	s := "abc"
 	var s1 = []string{"abc"}
-
 	fmt.Println(s1[0] == s)
+
+	//strings.LastIndex 返回子串在 str中最后一次出现的索引位置
+	serviceMethod := "Search.GetUpRes"
+	dot := strings.LastIndex(serviceMethod, ".")
+	fmt.Println(dot)
+
+	fmt.Println(serviceMethod[:dot] + "," + serviceMethod[dot+1:])
 }
