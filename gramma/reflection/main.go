@@ -53,7 +53,24 @@ func main() {
 
 	fmt.Println(y)
 
+	/*
+	   3 reflect.New : 返回值的类型是指针类型
+	*/
+
+	ReplyType reflect.Type
+
+
+	replyv := reflect.New(m.ReplyType.Elem())
+	switch m.ReplyType.Elem().Kind() {
+	case reflect.Map:
+		replyv.Elem().Set()
+	}
 }
+
+type Method struct{
+	ReplyType reflect.Type
+}
+
 
 type Value struct {
 	a float64
