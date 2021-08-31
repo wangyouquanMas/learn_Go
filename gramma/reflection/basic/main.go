@@ -173,6 +173,10 @@ func main() {
 	interA = interB
 	interfaceT := reflect.TypeOf(interA)
 	fmt.Println(interfaceT.NumMethod())
+
+	fmt.Println("*********nil************")
+	//reflect.TypeOf((*error)(nil)).Elem(): 返回类型元素的名称nil
+	fmt.Println(reflect.TypeOf((*error)(nil)).Elem())
 }
 
 type structT struct {
@@ -205,4 +209,17 @@ func (s structT) test2() {
 
 func (s structT) test3() {
 
+}
+
+//TODO : 断言的使用
+func (s *Service) getUpSearchHighlight(hl *model.UpperElastic, up *pb.ArchiveLangUp) (err error) {
+	if hl == nil || up == nil {
+		return
+	}
+	if names, exist := hl.Name.([]interface{}); exist {
+		if len(names) > 0 {
+			up.Name = names[0].(string)
+		}
+	}
+	return
 }

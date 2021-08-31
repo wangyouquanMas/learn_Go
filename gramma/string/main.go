@@ -28,12 +28,37 @@ func main() {
 	var s1 = []string{"abc"}
 	fmt.Println(s1[0] == s)
 
-	//strings.LastIndex 返回子串在 str中最后一次出现的索引位置
-	serviceMethod := "Search.GetUpRes"
-	dot := strings.LastIndex(serviceMethod, ".")
-	fmt.Println(dot)
+	//字符串切换，不区分中英文
+	s2 := "abc"
+	res := "["
+	for i := 0; i < len([]rune(s2)); i++ {
+		//ch := []rune(s2)[i]
+		prefix := "<em class=\"keyword\">"
+		suffix := "</em>"
+		temp := prefix + string([]rune(s2)[i]) + suffix
+		res = res + temp
+	}
+	res = res + "]"
+	fmt.Println(res)
 
-	fmt.Println(serviceMethod[:dot] + "," + serviceMethod[dot+1:])
+	//if req.NameRaw != "" {
+	//	res := "["
+	//	for i := 0; i < len(up.Name); i++ {
+	//		prefix := "<em class=\"keyword\">"
+	//		suffix := "</em>"
+	//		temp := prefix + string([]rune(up.Name)[i]) + suffix
+	//		res = res+temp
+	//		//up.Name = "[<em class=\"keyword\">l</em><em class=\"keyword\">e</em><em class=\"keyword\">a</em><em class=\"keyword\">s</em><em class=\"keyword\">o</em><em class=\"keyword\">n</em>]"
+	//	}
+	//	res = res+"]"
+	//}
+
+	//strings.LastIndex 返回子串在 str中最后一次出现的索引位置
+	//serviceMethod := "Search.GetUpRes"
+	//dot := strings.LastIndex(serviceMethod, ".")
+	//fmt.Println(dot)
+
+	//fmt.Println(serviceMethod[:dot] + "," + serviceMethod[dot+1:])
 	////fmt.Print(len(word))
 
 	//var a = "abc"
