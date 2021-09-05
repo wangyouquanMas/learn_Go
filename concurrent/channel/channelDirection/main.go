@@ -1,7 +1,7 @@
 package main
 
 import "fmt"
-
+a
 // learn_Go作为参数时，可以指定 receive learn_Go  /或者 send learn_Go
 
 func ping(pings chan<- string, msg string) {
