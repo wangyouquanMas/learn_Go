@@ -88,6 +88,14 @@ func main() {
 		fmt.Println("false")
 	}
 
+	fmt.Println("=====分隔线5=====")
+	a := reflect.TypeOf("")
+	fmt.Println(a.Kind())
+	argv := reflect.New(reflect.TypeOf(""))
+	// reflect.New： 返回指针
+	fmt.Println(argv.Kind())
+	//argv.Interface(): 转为接口类型 类似  var i interface = argv
+	fmt.Println(argv.Interface())
 }
 
 //func main() {
