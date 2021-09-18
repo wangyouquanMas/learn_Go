@@ -1,5 +1,5 @@
 // geektutu.com
-// main.go
+// reflectTypeOfNullInterfaceElem.go
 package main
 
 import (
@@ -30,30 +30,28 @@ func main() {
 	})
 
 	//	数解析 : 动态路由 [当每个url携带了不同的请求参数]
-	r.GET("/user/:name",func(c *gin.Context){
-		name:= c.Param("name")
-		c.String(http.StatusOK,"Hello %s",name)
+	r.GET("/user/:name", func(c *gin.Context) {
+		name := c.Param("name")
+		c.String(http.StatusOK, "Hello %s", name)
 	})
-
 
 	// 获取query参数 如 curl "http://localhost:9999/users?name=Tom&role=student"
 	r.GET("/users", func(c *gin.Context) {
 		name := c.Query("name")
-		role := c.DefaultQuery("role","teacher")
-		c.String(http.StatusOK,"%s is a %s",name,role)
+		role := c.DefaultQuery("role", "teacher")
+		c.String(http.StatusOK, "%s is a %s", name, role)
 	})
 
 	// 获取post参数
-	r.POST("/form",func(c *gin.Context){
+	r.POST("/form", func(c *gin.Context) {
 		username := c.PostForm("username")
-		password := c.DefaultPostForm("password","0000000")
+		password := c.DefaultPostForm("password", "0000000")
 
-		c.JSON(http.StatusOK,gin.H{
+		c.JSON(http.StatusOK, gin.H{
 			"username": username,
 			"password": password,
 		})
 	})
-
 
 	// GET 和 POST 混合
 	//$ curl "http://localhost:9999/posts?id=9876&page=7"  -X POST -d 'username=geektutu&password=1234'
@@ -72,59 +70,55 @@ func main() {
 		})
 	})
 
-
 	//Map参数(字典参数)
 	//curl -g "http://localhost:9999/post?ids[jack]=001&ids[tom]=002" -d "names[lucy]=a&names[burry]=b"
-	r.POST("/post",func(c *gin.Context){
+	r.POST("/post", func(c *gin.Context) {
 		ids := c.QueryMap("ids")
 		names := c.PostFormMap("names")
 
-		c.JSON(http.StatusOK,gin.H{
-			"ids":ids,
-			"names":names,
+		c.JSON(http.StatusOK, gin.H{
+			"ids":   ids,
+			"names": names,
 		})
 	})
 
-
 	//重定向
-	r.GET("/redirect",func(c *gin.Context){
-		c.Redirect(http.StatusMovedPermanently,"/index")
+	r.GET("/redirect", func(c *gin.Context) {
+		c.Redirect(http.StatusMovedPermanently, "/index")
 	})
 
-	r.GET("/goindex",func(c *gin.Context){
+	r.GET("/goindex", func(c *gin.Context) {
 		c.Request.URL.Path = "/"
 		r.HandleContext(c)
 	})
-
 
 	//分组路由
 	//利用分组路由还可以更好地实现权限控制，例如将需要登录鉴权的路由放到同一分组中去，简化权限控制。
 
 	defaultHandler := func(c *gin.Context) {
-		c.JSON(http.StatusOK,gin.H{
-			"path":c.FullPath(),
+		c.JSON(http.StatusOK, gin.H{
+			"path": c.FullPath(),
 		})
 	}
 
 	//group v1
 	v1 := r.Group("/v1")
 	{
-		v1.GET("/posts",defaultHandler)
-		v1.GET("/series",defaultHandler)
+		v1.GET("/posts", defaultHandler)
+		v1.GET("/series", defaultHandler)
 	}
 
 	//group v2
 	v2 := r.Group("/v2")
 	{
-		v2.GET("/posts",defaultHandler)
-		v2.GET("/series",defaultHandler)
+		v2.GET("/posts", defaultHandler)
+		v2.GET("/series", defaultHandler)
 	}
-
 
 	//上传文件
 	r.POST("/post1", func(c *gin.Context) {
-		file,_:= c.FormFile("file")
-		c.String(http.StatusOK,"%s uploaded!",file.Filename)
+		file, _ := c.FormFile("file")
+		c.String(http.StatusOK, "%s uploaded!", file.Filename)
 	})
 
 	//上传多个文件
@@ -139,7 +133,7 @@ func main() {
 		}
 		c.String(http.StatusOK, "%d files uploaded!", len(files))
 	})
-// 后续参考 https://geektutu.com/post/quick-go-gin.html
+	// 后续参考 https://geektutu.com/post/quick-go-gin.html
 
 	//bind  【注意每个 gin.Default会产生不同的实例】
 	// 也就是将 请求参数 与 参数结构体中定义的参数名称 对应起来
@@ -163,7 +157,6 @@ func main() {
 			"b":            param.B,
 		})
 	})
-
 
 	// query 【get】 和 form [post]都是使用的 form 这个tag
 	//Query 和 Form 是可以绑定到一个结构体当中
@@ -214,10 +207,6 @@ func main() {
 	// 调用 MustBindWith 自动根据请求类型来判断绑定
 	//func (c *Context) Bind(obj interface{}) error
 
-
 	//r.Run()函数来让应用运行在本地服务器上，默认监听端口是 _8080_，可以传入参数设置端口，例如r.Run(":9999")即运行在 _9999_端口。
 	r.Run(":9999") // listen and serve on 0.0.0.0:8080
 }
-
-
-
