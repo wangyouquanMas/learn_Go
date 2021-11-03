@@ -38,16 +38,22 @@ func main() {
 	fmt.Println(res)
 }
 
-func test() (res int) {
+type Item struct {
+	a int
+}
 
-	//
-	res = 3
+func test() (res *Item) {
 
-	var t = []int{3, 2, 1}
-	for _, res := range t {
-		fmt.Println(res)
+	res, err := test1()
+	if err != nil {
+		return
 	}
-
+	fmt.Println(res)
 	return
+}
 
+func test1() (res *Item, err error) {
+	return &Item{
+		a: 3,
+	}, nil
 }

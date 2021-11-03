@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "@commitlint/config-conventional": "^14.1.0",
+    "commitlint": "^14.1.0",
+    "husky": "^7.0.4"
+  }
+}
+
+"husky": {
+  "hooks": {
+    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+  }
+}
