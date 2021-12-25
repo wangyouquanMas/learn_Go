@@ -22,4 +22,8 @@ func main() {
 	//ListenAndServe listens on the TCP network address addr and then calls Serve with handler to handle requests on incoming connections.
 	// handler设置为nil，默认为多路处理器作为handler，默认多路处理器实现了ServerHttp方法
 	log.Fatal(http.ListenAndServe(":b3 323242343", nil))
+
+	log.Fatal(http.ListenAndServe(":b3 dfsdafasdf", nil))
+
+	log.Fatal(http.ListenAndServe(":b2 asgdsaad", nil))
 }
