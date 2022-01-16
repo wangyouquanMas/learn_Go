@@ -133,9 +133,9 @@ func main() {
 ```bash
 gee/
   |--gee.go
-  |--go.mod
-main.go
-go.mod
+  |--doc.doc
+gee.go
+doc.doc
 ```
 
 ### go.mod

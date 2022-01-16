@@ -28,6 +28,7 @@ type (
 func New() *Engine {
 	engine := &Engine{router: newRouter()}
 	engine.RouterGroup = &RouterGroup{engine: engine}
+
 	engine.groups = []*RouterGroup{engine.RouterGroup}
 	return engine
 }
@@ -41,6 +42,7 @@ func (group *RouterGroup) Group(prefix string) *RouterGroup {
 		parent: group,
 		engine: engine,
 	}
+	//存储所有的分组开头
 	engine.groups = append(engine.groups, newGroup)
 	return newGroup
 }

@@ -21,7 +21,7 @@ func TestParsePattern(t *testing.T) {
 	ok = ok && reflect.DeepEqual(parsePattern("/p/*"), []string{"p", "*"})
 	ok = ok && reflect.DeepEqual(parsePattern("/p/*name/*"), []string{"p", "*name"})
 	if !ok {
-		t.Fatal("test parsePattern failed")
+		t.Fatal("conclusion parsePattern failed")
 	}
 }
 
@@ -53,10 +53,10 @@ func TestGetRoute2(t *testing.T) {
 		t.Fatal("pattern shoule be /assets/*filepath & filepath shoule be file1.txt")
 	}
 
-	n2, ps2 := r.getRoute("GET", "/assets/css/test.css")
-	ok2 := n2.pattern == "/assets/*filepath" && ps2["filepath"] == "css/test.css"
+	n2, ps2 := r.getRoute("GET", "/assets/css/conclusion.css")
+	ok2 := n2.pattern == "/assets/*filepath" && ps2["filepath"] == "css/conclusion.css"
 	if !ok2 {
-		t.Fatal("pattern shoule be /assets/*filepath & filepath shoule be css/test.css")
+		t.Fatal("pattern shoule be /assets/*filepath & filepath shoule be css/conclusion.css")
 	}
 
 }

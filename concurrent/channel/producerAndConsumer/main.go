@@ -48,7 +48,7 @@ func main() {
 }
 
 //
-//func main() {
+//func gee() {
 //	data := make(chan int)
 //
 //	// producer

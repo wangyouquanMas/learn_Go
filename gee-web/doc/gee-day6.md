@@ -152,7 +152,7 @@ func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
    |---arr.tmpl
    |---css.tmpl
    |---custom_func.tmpl
----main.go
+---gee.go
 ```
 
 ```html

@@ -13,7 +13,7 @@ import (
 	"sync"
 )
 
-//func main() {
+//func gee() {
 //	var i *int
 //	i = new(int)
 //	*i = 10

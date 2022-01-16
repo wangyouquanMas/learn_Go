@@ -13,7 +13,7 @@ func main() {
 	http.Handle("/static/",
 		http.StripPrefix("/static/",
 			http.FileServer(http.Dir("./static"))))
-	http.HandleFunc("/net/http/test", handler.UploadFile)
+	http.HandleFunc("/net/http/conclusion", handler.UploadFile)
 
 	// 监听端口
 	fmt.Println("上传服务正在启动, 监听端口:8080...")

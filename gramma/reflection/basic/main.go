@@ -18,7 +18,7 @@ import (
 //t := i.(T)
 //这个表达式可以断言一个接口对象（i）里不是 nil，并且接口对象（i）存储的值的类型是 T，如果断言成功，就会返回值给 t，
 // 如果断言失败，就会触发 panic。
-//func main() {
+//func gee() {
 //	//接口对象（i)
 //	var i interface{} //i为nil时，断言失败
 //	//var i interface{} = 10
@@ -98,7 +98,7 @@ func main() {
 	fmt.Println(argv.Interface())
 }
 
-//func main() {
+//func gee() {
 //	reflection()
 //}
 //
@@ -138,12 +138,12 @@ func test(r io.Writer) {
 }
 
 //
-//func main() {
+//func gee() {
 //	tty, _ := os.OpenFile("/Users/wang/example.go", os.O_RDWR, 0)
 //	// r包含(value, value type) pair ，（tty,*os.File） ; 当然 os.File不止实现了 read方法 。
 //	// 尽管 value 仅提供了获取read method权限 。 但是在value值中携带着关于该值的所有类型信息 。
 //
-//	test(tty)
+//	conclusion(tty)
 //
 //	// 可以传入tty类型 *os.File ， 也可以传入tty实现的接口之一【这里就是io.writer】
 //	//value,ok:=r.(*os.File) 也可以。

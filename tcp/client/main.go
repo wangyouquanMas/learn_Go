@@ -8,16 +8,10 @@ import (
 )
 
 func main() {
-	//TCP连接创建的是双向通道，双方都可以同时给对方发数据。
-	client, err := net.Dial("tcp", "127.0.0.1:8080")
-	if err != nil {
-		fmt.Println("err:", err)
-		return
-	}
+	client, _ := net.Dial("tcp", "127.0.0.1:8080")
 
-	defer client.Close()
-	// 当前的go routine 堵塞了 ,只有server解析完请求后，才退出执行主协程。
-	//
+	//当前的go routine 堵塞了 ,只有server解析完请求后，才退出执行主协程。
+
 	go func() {
 		input := make([]byte, 1024)
 
@@ -32,7 +26,7 @@ func main() {
 		}
 	}()
 
-	buf1 := make([]byte, 1024)
+	buf1 := make([]byte, 1024*1024)
 	n, _ := client.Read(buf1)
 	fmt.Println("第二个client :", string(buf1[:n]))
 

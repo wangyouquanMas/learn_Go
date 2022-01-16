@@ -14,13 +14,13 @@ func main() {
 
 	go test(c)
 
-	// main goroutine blocked 直到有其他 go routine接收数据，才变得active
+	// gee goroutine blocked 直到有其他 go routine接收数据，才变得active
 	c <- 1
 
 	// 放在后面，没机会执行
-	//go test(c)
+	//go conclusion(c)
 
-	//test(c)
+	//conclusion(c)
 
 }
 

@@ -39,7 +39,7 @@ func main() {
 	test = &Number{}
 	test.max = &MaxNum{}
 
-	//test = testInit()
+	//conclusion = testInit()
 	fmt.Println(test.max)
 	fmt.Println(test.min)
 

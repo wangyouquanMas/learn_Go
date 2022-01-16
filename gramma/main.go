@@ -17,105 +17,96 @@ import "fmt"
 //  }
 // }
 
-
 // 接口
 type Phone interface {
- call()
+	call()
 
-// 被包含的接口的所有方法都会被包含到新的接口中。
-//只有实现接口中所有的方法，包括被包含的接口的方法，才算是实现了接口。
+	// 被包含的接口的所有方法都会被包含到新的接口中。
+	//只有实现接口中所有的方法，包括被包含的接口的方法，才算是实现了接口。
 
- Battery
+	Battery
 }
 
 type NokiaPhone struct {
 }
 
 func (nokiaPhone NokiaPhone) call() {
- fmt.Println("I am Nokia, I can call you!")
+	fmt.Println("I am Nokia, I can call you!")
 }
 
 func (nokiaPhone NokiaPhone) charge() {
- fmt.Println("I am Nokia, I can call you!")
+	fmt.Println("I am Nokia, I can call you!")
 }
 
 type IPhone struct {
 }
 
 func (iPhone IPhone) call() {
- fmt.Println("I am iPhone, I can call you!")
+	fmt.Println("I am iPhone, I can call you!")
 }
 func (iPhone IPhone) charge() {
- fmt.Println("I am iPhone, I can call you!")
+	fmt.Println("I am iPhone, I can call you!")
 }
 
-type Battery interface{
- charge()
+type Battery interface {
+	charge()
 }
 
-type NanFuBattery struct{
+type NanFuBattery struct {
 }
 
-func (nanFuBattery NanFuBattery) charge(){
-  fmt.Println("I'm in charge of battery")
+func (nanFuBattery NanFuBattery) charge() {
+	fmt.Println("I'm in charge of battery")
 }
 
 func main() {
 
- //接口使用
- var phone Phone
+	//接口使用
+	var phone Phone
 
- // new 返回的是传入类型的指针
- phone = new(NokiaPhone)
- phone.call()
+	// new 返回的是传入类型的指针
+	phone = new(NokiaPhone)
+	phone.call()
 
+	phone = new(IPhone)
+	phone.call()
 
- phone = new(IPhone)
- phone.call()
+	var battery Battery
 
- var battery Battery
+	battery = new(NanFuBattery)
+	battery.charge()
 
- battery = new(NanFuBattery)
- battery.charge()
+	var message = "abc"
 
- var message = "abc"
+	var pointer *string
+	// &也可以定义变量
+	pointer = &message
 
- var pointer *string
- // &也可以定义变量
- pointer =&message
+	fmt.Println(*pointer)
 
- fmt.Println(*pointer)
+	//强制类型转换  String 《-》 Byte
 
- //强制类型转换  String 《-》 Byte
+	var str1 string = "conclusion"
+	var data1 []byte = []byte(str1)
+	println(data1, len(data1))
 
-  var str1 string = "test"
-  var data1 []byte = []byte(str1)
-  println(data1,len(data1))
+	var data [10]byte
+	data[0] = 'T'
+	data[1] = 'E'
+	var str string = string(data[:])
+	fmt.Printf(str)
 
+	fmt.Println("************分隔符************")
 
-  var data[10] byte
-  data[0] = 'T'
-  data[1] = 'E'
-  var str string = string(data[:])
-  fmt.Printf(str)
+	//数组
+	var (
+		field = []string{"name"}
+	)
+	fmt.Println(field)
 
-
-  fmt.Println("************分隔符************")
-
-
- //数组
- var (
-  field = []string{"name"}
-  )
-  fmt.Println(field)
-
- stringarr := []string{"要给值"}
- var stringarr1 = []string{"1"}
- var a []string =  []string{"1"}
- fmt.Println(stringarr1,stringarr,a)
-
-
-
-
+	stringarr := []string{"要给值"}
+	var stringarr1 = []string{"1"}
+	var a []string = []string{"1"}
+	fmt.Println(stringarr1, stringarr, a)
 
 }

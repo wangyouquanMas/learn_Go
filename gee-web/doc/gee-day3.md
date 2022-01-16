@@ -269,7 +269,7 @@ func TestParsePattern(t *testing.T) {
 	ok = ok && reflect.DeepEqual(parsePattern("/p/*"), []string{"p", "*"})
 	ok = ok && reflect.DeepEqual(parsePattern("/p/*name/*"), []string{"p", "*name"})
 	if !ok {
-		t.Fatal("test parsePattern failed")
+		t.Fatal("conclusion parsePattern failed")
 	}
 }
 

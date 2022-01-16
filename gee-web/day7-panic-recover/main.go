@@ -16,7 +16,7 @@ Hello Geektutu
 Traceback:
         /usr/local/Cellar/go/1.12.5/libexec/src/runtime/panic.go:523
         /usr/local/Cellar/go/1.12.5/libexec/src/runtime/panic.go:44
-        /Users/7days-golang/day7-panic-recover/main.go:47
+        /Users/7days-golang/day7-panic-recover/gee.go:47
         /Users/7days-golang/day7-panic-recover/gee/context.go:41
         /Users/7days-golang/day7-panic-recover/gee/recovery.go:37
         /Users/7days-golang/day7-panic-recover/gee/context.go:41

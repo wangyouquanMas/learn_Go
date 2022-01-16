@@ -2,9 +2,9 @@ package gob
 
 import (
 	"bufio"
-	"channel/gRPC/day2-client/codec"
 	"encoding/gob"
 	"io"
+	"learn_Go/gRPC/day2-client/codec"
 )
 
 //1  参考gob原码 定义结构体

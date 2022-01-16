@@ -39,5 +39,4 @@ func main() {
 	json.Unmarshal(stuByte, &stu41)
 	//json.Unmarshal(stuByte, *stu41)
 	fmt.Println((stu41))
-
 }

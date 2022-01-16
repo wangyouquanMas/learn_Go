@@ -48,8 +48,8 @@ func main() {
 	/*
 		2 reflect.value ： 使用接口方法恢复接口值
 	*/
-
-	y := v.Interface().(float64)
+	//
+	//y := v.Interface().(float64)
 
 	fmt.Println(y)
 
@@ -57,20 +57,18 @@ func main() {
 	   3 reflect.New : 返回值的类型是指针类型
 	*/
 
-	ReplyType reflect.Type
+	//ReplyType reflect.Type
 
-
-	replyv := reflect.New(m.ReplyType.Elem())
-	switch m.ReplyType.Elem().Kind() {
-	case reflect.Map:
-		replyv.Elem().Set()
-	}
+	//replyv := reflect.New(m.ReplyType.Elem())
+	//switch m.ReplyType.Elem().Kind() {
+	//case reflect.Map:
+	//	replyv.Elem().Set()
+	//}
 }
 
-type Method struct{
+type Method struct {
 	ReplyType reflect.Type
 }
-
 
 type Value struct {
 	a float64

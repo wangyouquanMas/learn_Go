@@ -32,12 +32,12 @@ func main() {
 	//goroutine1
 	go handle(ctx, 500*time.Millisecond)
 
-	//goroutine2  [main 协程]
+	//goroutine2  [gee 协程]
 	select {
 
 	//once the Done learn_Go is closed, the case <-ctx.Done(): is selected.
 	case <-ctx.Done():
-		fmt.Println("main", ctx.Err())
+		fmt.Println("gee", ctx.Err())
 	}
 }
 

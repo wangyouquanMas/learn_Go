@@ -69,7 +69,7 @@ func chanDemo() {
 	//fmt.Println("第三遍完成")
 
 	// 每个worker发了两遍任务，所以收两遍done  【保障并发性】
-	// 所有的 堵塞的go routine 都由active的 main routine 进行read了
+	// 所有的 堵塞的go routine 都由active的 gee routine 进行read了
 	for _, worker := range workers {
 		<-worker.done
 		<-worker.done

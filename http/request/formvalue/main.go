@@ -11,6 +11,13 @@ import (
 	如： http://localhost:9000/?file=abc
 		formvalue(file) return "abc"
 
+     2  ： 获取表单数据
+
+/*
+	测试用例
+ curl -d "name=wang&pass=1234" "localhost:8080/conclusion"
+*/
+
 		其他
  		 if key is not present, FormValue returns the empty string.
 */

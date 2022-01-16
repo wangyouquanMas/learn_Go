@@ -35,9 +35,12 @@ func main() {
 		copy 函数copy从源slice的src中复制元素到目标dst，并且返回复制的元素的个数*/
 
 	//数组指针传递
-	var arr = [5]int{1, 2, 3, 4, 5}
-	fmt.Println(sum(&arr))
-	fmt.Println(arr)
+	//var arr = [5]int{1, 2, 3, 4, 5}
+	//fmt.Println(sum(&arr))
+	//fmt.Println(arr)
+
+	var arr = []int{1, 2, 3, 4, 5, 6, 7}
+	fmt.Println(arr[:6])
 }
 
 func sum(arr *[5]int) int {
